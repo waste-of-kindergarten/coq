@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LOGIC COQ中的逻辑系统</title>
+    <meta charset="utf-8">
+    <link rel = "icon" href = "pic\coq.ico" type="image/gif"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+body{
+	background:url("background3.png") no-repeat center center fixed;
+	//-webkit-background-size: cover;
+	//-o-background-size: cover;
+	//background-size: cover;
+	color : white;
+}     
+    
+    .markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}pre{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;padding:1em;margin:.5em 0;overflow:auto;line-height:1.5;tab-size:4;hyphens:none;color:#c5c8c6;background-color:#27292c !important;border:#43484c;border-radius:3px}pre[class*="language-"]{padding:1em}code[class*="language-"] .token.comment,pre[class*="language-"] .token.comment,code[class*="language-"] .token.prolog,pre[class*="language-"] .token.prolog,code[class*="language-"] .token.doctype,pre[class*="language-"] .token.doctype,code[class*="language-"] .token.cdata,pre[class*="language-"] .token.cdata{color:#7C7C7C}code[class*="language-"] .token.punctuation,pre[class*="language-"] .token.punctuation{color:#96CBFE}code[class*="language-"] .namespace,pre[class*="language-"] .namespace{opacity:.7}code[class*="language-"] .token.constant,pre[class*="language-"] .token.constant{color:#99CC99}code[class*="language-"] .token.boolean,pre[class*="language-"] .token.boolean,code[class*="language-"] .token.number,pre[class*="language-"] .token.number,code[class*="language-"] .token.function-name,pre[class*="language-"] .token.function-name{color:#FF73FD}code[class*="language-"] .token.tag,pre[class*="language-"] .token.tag{color:#96CBFE}code[class*="language-"] .token.selector,pre[class*="language-"] .token.selector{color:#96CBFE}code[class*="language-"] .token.attr-name,pre[class*="language-"] .token.attr-name{color:#C6C5FE}code[class*="language-"] .token.string,pre[class*="language-"] .token.string{color:#A8FF60}code[class*="language-"] .token.char,pre[class*="language-"] .token.char{color:#FF8000}code[class*="language-"] .token.entity,pre[class*="language-"] .token.entity{color:#FFD2A7}code[class*="language-"] .token.url,pre[class*="language-"] .token.url{color:#7C7C7C}code[class*="language-"] .token.operator,pre[class*="language-"] .token.operator{color:#EDEDED}code[class*="language-"] .token.atrule,pre[class*="language-"] .token.atrule,code[class*="language-"] .token.attr-value,pre[class*="language-"] .token.attr-value,code[class*="language-"] .token.keyword,pre[class*="language-"] .token.keyword{color:#CFCB90}code[class*="language-"] .token.function,pre[class*="language-"] .token.function{color:#FFD2A7}code[class*="language-"] .token.class-name,pre[class*="language-"] .token.class-name{color:#FFD2A7}code[class*="language-"] .token.variable,pre[class*="language-"] .token.variable{color:#C6C5FE}code[class*="language-"] .token.regex,pre[class*="language-"] .token.regex,code[class*="language-"] .token.important,pre[class*="language-"] .token.important{color:#E9C062}code[class*="language-"] .token.important,pre[class*="language-"] .token.important,code[class*="language-"] .token.bold,pre[class*="language-"] .token.bold{font-weight:bold}code[class*="language-"] .token.italic,pre[class*="language-"] .token.italic{font-style:italic}code[class*="language-"] .token.entity,pre[class*="language-"] .token.entity{cursor:help}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:rgba(153,122,102,0.08);background:linear-gradient(to right, rgba(153,122,102,0.1) 70%, rgba(153,122,102,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:rgba(153,122,102,0.4);color:#f5f2f0;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px white}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}.emoji {
+  height: 0.8em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#ccc;background-color:#141414;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#fff}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#a3a3a3}html body strong{color:#fff}html body del{color:#a3a3a3}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#a3a3a3;background-color:#282828;border-left:4px solid #3d3d3d}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#3d3d3d;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#fff}html body table td,html body table th{border:1px solid #3d3d3d;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#fff;background-color:#282828;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#3d3d3d;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#fff;border:1px solid #3d3d3d;border-bottom:2px solid #2e2e2e;padding:2px 4px;background-color:#282828;border-radius:3px}@media print{html body{background-color:#141414}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#fff;page-break-after:avoid}html body blockquote{color:#a3a3a3}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}
+    /* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+    </style>
+    
+  </head>
+  <body for="html-export">
+    <div class="mume markdown-preview">
+    <html><head></head><body><div><h1 class="mume-header" id="centerlogic-coq%E4%B8%AD%E7%9A%84%E9%80%BB%E8%BE%91%E7%B3%BB%E7%BB%9Fcenter"><center>LOGIC COQ&#x4E2D;&#x7684;&#x903B;&#x8F91;&#x7CFB;&#x7EDF;</center></h1>
+
+<h1 class="mume-header" id="%E9%80%BB%E8%BE%91%E8%81%94%E7%BB%93%E8%AF%8D">&#x903B;&#x8F91;&#x8054;&#x7ED3;&#x8BCD;</h1>
+
+<h2 class="mume-header" id="%E5%90%88%E5%8F%96">&#x5408;&#x53D6;</h2>
+
+<p>&#x547D;&#x9898;A&#x4E0E;B&#x5408;&#x53D6;&#x5199;&#x4F5C;&quot;A /\ B&quot;&#xFF0C;&#x8868;&#x793A;&#x4E00;&#x4E2A;A&#x4E0E;B&#x5747;&#x4E3A;&#x771F;&#x7684;&#x65AD;&#x8A00;&#x3002;</p>
+<h3 class="mume-header" id="%E5%90%88%E5%8F%96%E7%9A%84%E5%91%BD%E9%A2%98%E8%AF%81%E6%98%8E">&#x5408;&#x53D6;&#x7684;&#x547D;&#x9898;&#x8BC1;&#x660E;</h3>
+
+<p>&#x8BC1;&#x660E;&#x5408;&#x53D6;&#x7684;&#x547D;&#x9898;&#xFF0C;&#x5373;&#x5206;&#x522B;&#x8BC1;&#x660E;&#x6BCF;&#x4E2A;&#x88AB;&#x5408;&#x53D6;&#x7684;&#x547D;&#x9898;&#x90FD;&#x662F;&#x771F;&#x7684;&#x3002;</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Example">Example</span> and_example <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> A B<span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span> <span class="token punctuation">,</span> A <span class="token operator">-&gt;</span> B <span class="token operator">-&gt;</span> A <span class="token operator">/\</span> B<span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros<span class="token punctuation">.</span>
+split<span class="token punctuation">.</span>
+<span class="token keyword keyword-apply">apply</span> H<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> H0<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><p>&#x8FD9;&#x91CC;&#x9762;&#x51FA;&#x73B0;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7B56;&#x7565;<code>split</code>,&#x5B83;&#x53EF;&#x4EE5;&#x5C06;&#x5408;&#x53D6;&#x7684;&#x547D;&#x9898;&#x8FDB;&#x884C;&#x62C6;&#x5206;&#xFF0C;&#x5F62;&#x6210;&#x82E5;&#x5E72;&#x4E2A;&#x5B50;&#x76EE;&#x6807;&#x3002;</p>
+<h3 class="mume-header" id="%E5%B8%A6%E6%9C%89%E5%90%88%E5%8F%96%E5%89%8D%E6%8F%90%E7%9A%84%E5%91%BD%E9%A2%98%E8%AF%81%E6%98%8E">&#x5E26;&#x6709;&#x5408;&#x53D6;&#x524D;&#x63D0;&#x7684;&#x547D;&#x9898;&#x8BC1;&#x660E;</h3>
+
+<p>&#x8003;&#x8651;&#x4E24;&#x4E2A;&#x5173;&#x4E8E;&#x5408;&#x53D6;&#x7684;&#x8574;&#x542B;&#x7ED3;&#x8BBA;<code>P /\ Q -&gt; P</code>,<code>P /\ Q -&gt; Q</code>.</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Lemma">Lemma</span> proj1 <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> P Q <span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">,</span>
+P <span class="token operator">/\</span> Q <span class="token operator">-&gt;</span> P<span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros P Q HPQ<span class="token punctuation">.</span>
+destruct HPQ <span class="token keyword keyword-as">as</span> <span class="token punctuation">[</span>HP <span class="token keyword keyword-_">_</span><span class="token punctuation">]</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span> <span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><pre data-role="codeBlock" data-info class="language-"><code>Lemma proj2 : forall P Q : Prop,
+P /\ Q -&gt; Q.
+Proof.
+intros P Q HPQ.
+destruct HPQ as [_ HQ].
+apply HQ. Qed.
+</code></pre><p>destruct &#x53EF;&#x4EE5;&#x5C06;&#x524D;&#x63D0;&#x4E2D;&#x7684;&#x5408;&#x53D6;&#x5F0F;&#x8FDB;&#x884C;&#x89E3;&#x6784;&#xFF0C;&#x5F62;&#x6210;&#x4E24;&#x4E2A;&#x524D;&#x63D0;.<code>[HP _]</code>&#x4EE5;&#x53CA;<code>[_ HQ]</code>&#x5C06;&#x7ED3;&#x6784;&#x7684;&#x524D;&#x63D0;&#x8FDB;&#x884C;&#x547D;&#x540D;&#xFF0C;<code>_</code>&#x662F;&#x5360;&#x4F4D;&#x7B26;&#xFF0C;&#x5373;&#x8868;&#x793A;&#x8BE5;&#x524D;&#x63D0;&#x5B58;&#x5728;&#x4F46;&#x662F;&#x4E0D;&#x4E3A;&#x5176;&#x5206;&#x914D;&#x540D;&#x79F0;&#xFF08;&#x56E0;&#x4E3A;&#x4E0D;&#x4F1A;&#x4F7F;&#x7528;&#x8BE5;&#x524D;&#x63D0;&#xFF09;&#x3002;</p>
+<blockquote>
+<p>&#x9664;&#x4E86;destruct &#x8FD8;&#x53EF;&#x4EE5;&#x66F4;&#x65E9;&#x5730;&#x8FDB;&#x884C;&#x9690;&#x5F0F;&#x5206;&#x89E3;&#xFF0C;&#x89C1;&#x4E0B;&#x9762;&#x7ED3;&#x8BBA;&#x5F8B;&#x7684;&#x8BC1;&#x660E;&#x3002;</p>
+</blockquote>
+<p>&#x987A;&#x4FBF;&#x5217;&#x4E3E;&#x4E00;&#x4E9B;&#x7ECF;&#x5E38;&#x4F7F;&#x7528;&#x5230;&#x7684;&#x5408;&#x53D6;&#x7ED3;&#x8BBA;&#x3002;</p>
+<p><strong>&#x4EA4;&#x6362;&#x5F8B;</strong></p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Theorem">Theorem</span> and_comm <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> P Q <span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">,</span>
+P <span class="token operator">/\</span> Q <span class="token operator">-&gt;</span> Q <span class="token operator">/\</span> P<span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros P Q <span class="token punctuation">[</span>HP HQ<span class="token punctuation">]</span><span class="token punctuation">.</span>
+split<span class="token punctuation">.</span>
+<span class="token operator">-</span> <span class="token keyword keyword-apply">apply</span> HQ<span class="token punctuation">.</span>
+<span class="token operator">-</span> <span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><p><strong>&#x7ED3;&#x5408;&#x5F8B;</strong></p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Theorem">Theorem</span> and_assoc <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> P Q R <span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">,</span>
+P <span class="token operator">/\</span> <span class="token punctuation">(</span>Q <span class="token operator">/\</span> R<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token punctuation">(</span>P <span class="token operator">/\</span> Q<span class="token punctuation">)</span> <span class="token operator">/\</span> R<span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros P Q R <span class="token punctuation">[</span>HP <span class="token punctuation">[</span>HQ HR<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>
+<span class="token comment">(*&#x9690;&#x5F0F;&#x62C6;&#x5206;*)</span>
+split<span class="token punctuation">.</span>
+<span class="token operator">-</span> split<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HQ<span class="token punctuation">.</span>
+<span class="token operator">-</span> <span class="token keyword keyword-apply">apply</span> HR<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><blockquote>
+<p>&#x6CE8;&#x610F;: &#x4EA4;&#x6362;&#x5F8B;&#x548C;&#x7ED3;&#x5408;&#x5F8B;&#x90FD;&#x662F;&#x53CC;&#x5411;&#x7684;&#xFF0C;&#x8FD9;&#x91CC;&#x53EA;&#x8BC1;&#x660E;&#x5355;&#x5411;&#x662F;&#x56E0;&#x4E3A;<code>&lt;-&gt;</code>&#x8FD8;&#x6CA1;&#x6709;&#x5B66;&#x4E60;&#x3002;</p>
+</blockquote>
+<h2 class="mume-header" id="%E6%9E%90%E5%8F%96">&#x6790;&#x53D6;</h2>
+
+<h3 class="mume-header" id="%E6%9E%90%E5%8F%96%E7%9A%84%E5%91%BD%E9%A2%98%E8%AF%81%E6%98%8E">&#x6790;&#x53D6;&#x7684;&#x547D;&#x9898;&#x8BC1;&#x660E;</h3>
+
+<p>&#x5BF9;&#x4E8E;&#x6790;&#x53D6;&#x7684;&#x547D;&#x9898;<code>A \/ B</code>,&#x53EA;&#x9700;A&#x6216;B&#x4E8C;&#x8005;&#x4E4B;&#x4E00;&#x4E3A;&#x771F;&#x5373;&#x53EF;.&#x56E0;&#x6B64;&#x5728;&#x8BC1;&#x660E;&#x65F6;&#x9700;&#x8981;&#x5C06;&#x6790;&#x53D6;&#x7684;&#x547D;&#x9898;&#x62C6;&#x5206;&#x6210;A&#x6216;B&#x3002;</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Lemma">Lemma</span> or_impl1 <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> A B<span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span> <span class="token punctuation">,</span> A <span class="token operator">-&gt;</span> A <span class="token operator">\/</span> B<span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros A B HA<span class="token punctuation">.</span>
+left<span class="token punctuation">.</span>
+<span class="token keyword keyword-apply">apply</span> HA<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>  
+</pre><pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Lemma">Lemma</span> or_impl2 <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> A B <span class="token punctuation">:</span>
+<span class="token keyword keyword-Prop">Prop</span> <span class="token punctuation">,</span> B <span class="token operator">-&gt;</span> A <span class="token operator">\/</span> B<span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros A B HB<span class="token punctuation">.</span>
+right<span class="token punctuation">.</span>
+<span class="token keyword keyword-apply">apply</span> HB<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><p>&#x5229;&#x7528;<code>left</code> &#x548C; <code>right</code>&#x7B56;&#x7565;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x6790;&#x53D6;&#x547D;&#x9898;&#x7684;&#x7684;&#x5DE6;&#x4FA7;&#x548C;&#x53F3;&#x4FA7;&#x4F5C;&#x4E3A;&#x65B0;&#x7684;&#x76EE;&#x6807;&#x3002;</p>
+<h3 class="mume-header" id="%E5%B8%A6%E6%9C%89%E6%9E%90%E5%8F%96%E5%89%8D%E6%8F%90%E7%9A%84%E5%91%BD%E9%A2%98%E8%AF%81%E6%98%8E">&#x5E26;&#x6709;&#x6790;&#x53D6;&#x524D;&#x63D0;&#x7684;&#x547D;&#x9898;&#x8BC1;&#x660E;</h3>
+
+<p>&#x5F53;&#x524D;&#x63D0;&#x662F;&#x6790;&#x53D6;&#x547D;&#x9898;&#x65F6;&#xFF0C;&#x5FC5;&#x987B;&#x4FDD;&#x8BC1;&#x88AB;&#x6790;&#x53D6;&#x7684;&#x4EFB;&#x610F;&#x547D;&#x9898;&#x4E3A;&#x771F;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x7ED3;&#x8BBA;&#x4E3A;&#x771F;&#x3002;&#x56E0;&#x800C;&#xFF0C;&#x9700;&#x8981;&#x5C06;&#x524D;&#x63D0;&#x62C6;&#x5206;&#x6210;&#x82E5;&#x5E72;&#x60C5;&#x51B5;&#x5206;&#x522B;&#x8BC1;&#x660E;&#x3002;</p>
+<p><strong>&#x4EA4;&#x6362;&#x5F8B;</strong></p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Theorem">Theorem</span> or_comm <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> A B <span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">,</span>
+A <span class="token operator">\/</span> B <span class="token operator">-&gt;</span> B <span class="token operator">\/</span> A<span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros A B H<span class="token punctuation">.</span>
+destruct H <span class="token keyword keyword-as">as</span> <span class="token punctuation">[</span>HA <span class="token operator">|</span> HB<span class="token punctuation">]</span><span class="token punctuation">.</span>
+<span class="token comment">(*&#x663E;&#x5F0F;&#x62C6;&#x5206;*)</span>
+<span class="token operator">-</span> right<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HA<span class="token punctuation">.</span>
+<span class="token operator">-</span> left<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HB<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><p><strong>&#x7ED3;&#x5408;&#x5F8B;</strong></p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Theorem">Theorem</span> or_assoc <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> P Q R <span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">,</span>
+P <span class="token operator">\/</span> <span class="token punctuation">(</span>Q <span class="token operator">\/</span> R<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token punctuation">(</span>P <span class="token operator">\/</span> Q<span class="token punctuation">)</span> <span class="token operator">\/</span> R<span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros P Q R <span class="token punctuation">[</span>HP <span class="token operator">|</span> <span class="token punctuation">[</span>HQ <span class="token operator">|</span> HR<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>
+<span class="token comment">(*&#x9690;&#x5F0F;&#x62C6;&#x5206;*)</span>
+<span class="token operator">-</span> left<span class="token punctuation">.</span> left<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span>
+<span class="token operator">-</span> left<span class="token punctuation">.</span> right<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HQ<span class="token punctuation">.</span>
+<span class="token operator">-</span> right<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HR<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><h2 class="mume-header" id="%E5%81%87%E5%91%BD%E9%A2%98%E4%B8%8E%E5%90%A6%E5%AE%9A">&#x5047;&#x547D;&#x9898;&#x4E0E;&#x5426;&#x5B9A;</h2>
+
+<p>&#x5728;Coq&#x4E2D;&#xFF0C;not&#x5B9A;&#x4E49;&#x5982;&#x4E0B;:</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Definition">Definition</span> not <span class="token punctuation">(</span>P <span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">)</span> <span class="token operator">:=</span> P <span class="token operator">-&gt;</span> False<span class="token punctuation">.</span>
+<span class="token keyword keyword-Notation">Notation</span> <span class="token string">&quot;~ x&quot;</span> <span class="token operator">:=</span> <span class="token punctuation">(</span>not x<span class="token punctuation">)</span> <span class="token punctuation">:</span> type_scope<span class="token punctuation">.</span>
+</pre><p><strong>&#x81EA;&#x53CD;&#x5F8B;</strong></p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Theorem">Theorem</span> double_neg <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> P <span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">,</span>
+P <span class="token operator">-&gt;</span> <span class="token operator">~</span> <span class="token operator">~</span> P<span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros P HP<span class="token punctuation">.</span>
+unfold not<span class="token punctuation">.</span>
+intros H1<span class="token punctuation">.</span>
+<span class="token comment">(*&#x5F15;&#x5165;&#x65B0;&#x7684;&#x524D;&#x63D0;*)</span>
+<span class="token keyword keyword-apply">apply</span> H1<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><p><strong>&#x77DB;&#x76FE;&#x5F8B;</strong></p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Theorem">Theorem</span> contradiction <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> P <span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>P <span class="token operator">/\</span> <span class="token operator">~</span> P<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> True<span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros P <span class="token punctuation">[</span>HP HNP<span class="token punctuation">]</span><span class="token punctuation">.</span>
+unfold not <span class="token keyword keyword-in">in</span> HNP<span class="token punctuation">.</span>
+<span class="token keyword keyword-apply">apply</span> HNP <span class="token keyword keyword-in">in</span> HP<span class="token punctuation">.</span>
+destruct HP<span class="token punctuation">.</span>
+<span class="token comment">(*&#x7206;&#x70B8;&#x539F;&#x7406;*)</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><p>False&#x672C;&#x8EAB;&#x662F;&#x4E2A;&#x77DB;&#x76FE;&#x6027;&#x7684;&#x547D;&#x9898;&#xFF0C;&#x5982;&#x679C;&#x8BA9;False&#x8FDB;&#x5165;&#x5230;&#x8BC1;&#x660E;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x5BF9;&#x5176;&#x4F7F;&#x7528;destruct &#x6765;&#x5B8C;&#x6210;&#x8BC1;&#x660E;&#x3002;&#x5373;&#x7206;&#x70B8;&#x539F;&#x7406;&apos;&#x4ECE;&#x8C2C;&#x8BEF;&#x51FA;&#x53D1;&#xFF0C;&#x53EF;&#x4EE5;&#x8BC1;&#x660E;&#x4EFB;&#x4F55;&#x547D;&#x9898;&apos;&#x3002;</p>
+<h2 class="mume-header" id="%E9%80%BB%E8%BE%91%E7%AD%89%E4%BB%B7">&#x903B;&#x8F91;&#x7B49;&#x4EF7;</h2>
+
+<p>&#x903B;&#x8F91;&#x7B49;&#x4EF7;&#xFF0C;&#x5373;&#x201C;&#x5F53;&#x4E14;&#x4EC5;&#x5F53;&#x201D;&#xFF0C;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#x3002;</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Definition">Definition</span> iff <span class="token punctuation">(</span>P Q <span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">)</span> <span class="token operator">:=</span> <span class="token punctuation">(</span>P <span class="token operator">-&gt;</span> Q<span class="token punctuation">)</span> <span class="token operator">/\</span> <span class="token punctuation">(</span>Q <span class="token operator">-&gt;</span> P<span class="token punctuation">)</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Notation">Notation</span> <span class="token string">&quot;P &lt;-&gt; Q&quot;</span> <span class="token operator">:=</span> <span class="token punctuation">(</span>iff P Q<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword keyword-at">at</span> level <span class="token number">95</span><span class="token punctuation">,</span>no associativity<span class="token punctuation">)</span><span class="token punctuation">:</span> type_scope<span class="token punctuation">.</span>
+</pre><p>&#x6839;&#x636E;&#x5B9A;&#x4E49;&#xFF0C;&#x6211;&#x4EEC;&#x5F53;&#x7136;&#x53EF;&#x4EE5;&#x5728;&#x8BC1;&#x660E;&#x4E2D;&#x5C06;&#x5176;&#x89C6;&#x4E3A;&#x5408;&#x53D6;&#x7684;&#x547D;&#x9898;&#xFF0C;&#x5229;&#x7528;split&#x7B56;&#x7565;&#x5206;&#x522B;&#x8BC1;&#x660E;&#x3002;</p>
+<p><strong>&#x5BF9;&#x79F0;&#x6027;</strong></p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Theorem">Theorem</span> iff_sym <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> P Q <span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>P <span class="token operator">&lt;-&gt;</span> Q<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token punctuation">(</span>Q <span class="token operator">&lt;-&gt;</span> P<span class="token punctuation">)</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros P Q <span class="token punctuation">[</span>HPQ HQP<span class="token punctuation">]</span><span class="token punctuation">.</span>
+split<span class="token punctuation">.</span>
+<span class="token comment">(*&#x5148;&#x8BC1; P -&gt; Q*)</span>
+<span class="token operator">-</span> <span class="token keyword keyword-apply">apply</span> HQP<span class="token punctuation">.</span>
+<span class="token comment">(*&#x518D;&#x8BC1; Q -&gt; P*)</span>
+<span class="token operator">-</span> <span class="token keyword keyword-apply">apply</span> HPQ<span class="token punctuation">.</span> 
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><p><strong>&#x5206;&#x914D;&#x5F8B;</strong></p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Theorem">Theorem</span> or_distributes_over_and <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> P Q R <span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">,</span>
+P <span class="token operator">\/</span> <span class="token punctuation">(</span>Q <span class="token operator">/\</span> R<span class="token punctuation">)</span> <span class="token operator">&lt;-&gt;</span> <span class="token punctuation">(</span>P <span class="token operator">\/</span> Q<span class="token punctuation">)</span> <span class="token operator">/\</span> <span class="token punctuation">(</span>P <span class="token operator">\/</span> R<span class="token punctuation">)</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros P Q R<span class="token punctuation">.</span>
+split<span class="token punctuation">.</span>
+<span class="token operator">+</span>intros <span class="token punctuation">[</span>HP <span class="token operator">|</span> <span class="token punctuation">[</span>HQ HR<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>
+<span class="token comment">(*&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#x8BA8;&#x8BBA;*)</span>
+<span class="token operator">-</span>split<span class="token punctuation">.</span> left<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span> left<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span>
+<span class="token operator">-</span>split<span class="token punctuation">.</span>  right<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HQ<span class="token punctuation">.</span> right<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HR<span class="token punctuation">.</span>
+<span class="token operator">+</span>intros <span class="token punctuation">[</span><span class="token punctuation">[</span>HP <span class="token operator">|</span> HQ<span class="token punctuation">]</span>  <span class="token punctuation">[</span>HP1 <span class="token operator">|</span> HR<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>
+<span class="token comment">(*&#x56DB;&#x79CD;&#x60C5;&#x51B5;&#x8BA8;&#x8BBA;*)</span>
+<span class="token operator">-</span> left<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span>
+<span class="token operator">-</span>left<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span>
+<span class="token operator">-</span> left<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP1<span class="token punctuation">.</span>
+<span class="token operator">-</span> right<span class="token punctuation">.</span> split<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HQ<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HR<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span> 
+</pre><pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Theorem">Theorem</span> and_distrubutes_over_or<span class="token punctuation">:</span>
+<span class="token keyword keyword-forall">forall</span> P Q R<span class="token punctuation">:</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">,</span>
+P <span class="token operator">/\</span> <span class="token punctuation">(</span>Q <span class="token operator">\/</span> R<span class="token punctuation">)</span> <span class="token operator">&lt;-&gt;</span> <span class="token punctuation">(</span>P <span class="token operator">/\</span> Q<span class="token punctuation">)</span> <span class="token operator">\/</span> <span class="token punctuation">(</span>Q <span class="token operator">/\</span> R<span class="token punctuation">)</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros P Q R<span class="token punctuation">.</span>
+split<span class="token punctuation">.</span>
+<span class="token operator">+</span> intros <span class="token punctuation">[</span>HP <span class="token punctuation">[</span>HQ <span class="token operator">|</span> HR<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>
+<span class="token comment">(*&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#x8BA8;&#x8BBA;*)</span>
+<span class="token operator">-</span>left<span class="token punctuation">.</span> split<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HQ<span class="token punctuation">.</span>
+<span class="token operator">-</span>right<span class="token punctuation">.</span> split<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HR<span class="token punctuation">.</span>
+<span class="token operator">+</span> intros <span class="token punctuation">[</span><span class="token punctuation">[</span>HP HQ<span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token punctuation">[</span>HP1 HR<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>
+<span class="token comment">(*&#x4E24;&#x79CD;&#x60C5;&#x51B5;&#x8BA8;&#x8BBA;*)</span>
+<span class="token operator">-</span> split<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP<span class="token punctuation">.</span> left<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HQ<span class="token punctuation">.</span>
+<span class="token operator">-</span>split<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HP1<span class="token punctuation">.</span> right<span class="token punctuation">.</span> <span class="token keyword keyword-apply">apply</span> HR<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><h3 class="mume-header" id="%E5%B9%BF%E9%9B%86%E4%B8%8E%E9%80%BB%E8%BE%91%E7%AD%89%E4%BB%B7">&#x5E7F;&#x96C6;&#x4E0E;&#x903B;&#x8F91;&#x7B49;&#x4EF7;</h3>
+
+<p>Coq&#x7684;&#x67D0;&#x4E9B;&#x7B56;&#x7565;hi&#x7279;&#x6B8A;&#x5BF9;&#x5F85;iff&#x8BED;&#x53E5;&#xFF0C;&#x4ECE;&#x800C;&#x907F;&#x514D;&#x67D0;&#x4E9B;&#x5E95;&#x5C42;&#x7684;&#x8BC1;&#x660E;&#x72B6;&#x6001;&#x3002;&#x7279;&#x522B;&#x5730;&#xFF0C;rewrite &#x548C; reflexivity &#x4E5F;&#x53EF;&#x7528;&#x4E8E;iff&#x8BED;&#x53E5;&#x3002;</p>
+<pre class="language-text">From Coq Require Import Setoids.Setoid.
+</pre>
+<blockquote>
+<p>&#x5728;Coq 8.15&#x7248;&#x672C;&#x4E0B;&#xFF0C;&#x4F3C;&#x4E4E;&#x65E0;&#x9700;&#x5BFC;&#x5165;&#x5373;&#x53EF;&#x4F7F;&#x7528;rewrite&#x548C;reflexivity &#x5BF9;&#x7B49;&#x4EF7;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x3002;</p>
+</blockquote>
+<p>&#x201D;&#x5E7F;&#x96C6;&#x201C;&#x6307;&#x914D;&#x5907;&#x4E86;&#x7B49;&#x4EF7;&#x5173;&#x7CFB;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x5373;&#x6EE1;&#x8DB3;&#x81EA;&#x53CD;&#x6027;&#x3001;&#x5BF9;&#x79F0;&#x6027;&#x548C;&#x4F20;&#x9012;&#x6027;&#x7684;&#x5173;&#x7CFB;&#x3002;&#x5F53;&#x4E00;&#x4E2A;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x4E24;&#x4E2A;&#x5143;&#x7D20;&#x5728;&#x8FD9;&#x79CD;&#x5173;&#x7CFB;&#x7B49;&#x4EF7;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;rewrite &#x5C06;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x66FF;&#x6362;&#x4E3A;&#x53E6;&#x4E00;&#x4E2A;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Lemma">Lemma</span> mult_0 <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> n m <span class="token punctuation">,</span> n <span class="token operator">*</span> m <span class="token operator">=</span> <span class="token number">0</span> <span class="token operator">&lt;-&gt;</span> n <span class="token operator">=</span> <span class="token number">0</span> <span class="token operator">\/</span> m <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Admitted">Admitted</span><span class="token punctuation">.</span> <span class="token comment">(*&#x8BC1;&#x660E;&#x7565;*)</span>
+<span class="token keyword keyword-Lemma">Lemma</span> mult_0_3 <span class="token punctuation">:</span>
+<span class="token keyword keyword-forall">forall</span> n m p<span class="token punctuation">,</span> n <span class="token operator">*</span> m <span class="token operator">*</span> p <span class="token operator">=</span> <span class="token number">0</span> <span class="token operator">&lt;-&gt;</span>n <span class="token operator">=</span> <span class="token number">0</span> <span class="token operator">\/</span> m <span class="token operator">=</span> <span class="token number">0</span> <span class="token operator">\/</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros n m p<span class="token punctuation">.</span>
+rewrite mult_0<span class="token punctuation">.</span>
+rewrite mult_0<span class="token punctuation">.</span>
+rewrite or_assoc<span class="token punctuation">.</span>
+reflexivity<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><p>&#x9664;&#x4E86;rewrite &#x548C; reflexivity&#x5916;&#xFF0C;apply&#x7B56;&#x7565;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x5728;&lt;-&gt;&#x4E0A;&#xFF0C;Coq&#x5C06;&#x5C1D;&#x8BD5;&#x731C;&#x51FA;&#x6B63;&#x786E;&#x7684;&#x65B9;&#x5411;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#x5C06;<code>mult_0</code>&#x7684;&#x4E00;&#x4E2A;&#x65B9;&#x5411;&#x62C6;&#x51FA;&#x6765;&#x4F5C;&#x4E3A;&#x547D;&#x9898;&#x3002;</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Lemma">Lemma</span> apply_iff_example<span class="token punctuation">:</span>
+<span class="token keyword keyword-forall">forall</span> n m <span class="token punctuation">:</span> nat <span class="token punctuation">,</span> n <span class="token operator">*</span> m <span class="token operator">=</span> <span class="token number">0</span> <span class="token operator">-&gt;</span> n <span class="token operator">=</span> <span class="token number">0</span> <span class="token operator">\/</span> m <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros n m H<span class="token punctuation">.</span>
+<span class="token keyword keyword-apply">apply</span> mult_0<span class="token punctuation">.</span>
+<span class="token keyword keyword-apply">apply</span> H<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><h2 class="mume-header" id="%E5%AD%98%E5%9C%A8%E9%87%8F%E8%AF%8D">&#x5B58;&#x5728;&#x91CF;&#x8BCD;</h2>
+
+<p>&#x6211;&#x4EEC;&#x6700;&#x65E9;&#x63A5;&#x89E6;&#x7684;&#x662F;&#x5168;&#x79F0;&#x91CF;&#x8BCD;<code>forall</code>,&#x73B0;&#x5728;&#x4ECB;&#x7ECD;&#x5B58;&#x5728;&#x91CF;&#x8BCD;<code>exists</code>.</p>
+<p>&#x5148;&#x770B;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;:</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Lemma">Lemma</span> exist_example <span class="token punctuation">:</span> <span class="token keyword keyword-exists">exists</span> n <span class="token punctuation">:</span> nat<span class="token punctuation">,</span> S n <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-exists">exists</span> <span class="token number">0</span><span class="token punctuation">.</span>
+reflexivity<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><p>&#x4E3A;&#x4E86;&#x8BC1;&#x660E;&#x5F62;&#x5982;&apos;exists x,P&apos;&#x7684;&#x8BED;&#x53E5;&#xFF0C;&#x9700;&#x8981;&#x627E;&#x5230;&#x5408;&#x9002;&#x7684;&#x503C;&#x66FF;&#x4EE3;x,&#x7136;&#x540E;&#x8BC1;&#x660E;&#x66FF;&#x6362;&#x540E;&#x7684;&#x547D;&#x9898;&#x3002;<code>exists 0</code>&#x5C06;n&#x66FF;&#x6362;&#x6210;0.</p>
+<p>&#x5982;&#x679C;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x6709;&#x5F62;&#x5982;<code>exists x,P</code>&#x7684;&#x5B58;&#x5728;&#x524D;&#x63D0;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x89E3;&#x6784;&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>Example exist_example1 : (exists n :nat ,S n = 1) -&gt; (exists m, S m = 1).
+Proof.
+intros [n Hn].
+exists n.
+apply Hn.
+Qed.
+</code></pre><blockquote>
+<p>&#x5C1D;&#x8BD5;&#x5C06;exists n&#x653E;&#x5230;&#x5927;&#x524D;&#x63D0;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#xFF0C;&#x6B64;&#x65F6;&#x6574;&#x4E2A;&#x547D;&#x9898;&#x53D8;&#x4E3A;<code>exists x,P</code>&#xFF0C;&#x6B64;&#x65F6;&#x9700;&#x8981;&#x5BF9;x&#x8D4B;&#x503C;&#x624D;&#x80FD;&#x7EE7;&#x7EED;&#x4E0B;&#x53BB;&#x3002;</p>
+</blockquote>
+<p><strong>&#x5426;&#x5B9A;&#x5BF9;&#x91CF;&#x8BCD;&#x7684;&#x4F5C;&#x7528;</strong></p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Theorem">Theorem</span> forall_not_exists <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> <span class="token punctuation">(</span>X<span class="token punctuation">:</span><span class="token keyword keyword-Type">Type</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>P<span class="token punctuation">:</span> X <span class="token operator">-&gt;</span> <span class="token keyword keyword-Prop">Prop</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token keyword keyword-forall">forall</span> x<span class="token punctuation">,</span> P x<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token operator">~</span> <span class="token punctuation">(</span><span class="token keyword keyword-exists">exists</span> x<span class="token punctuation">,</span> <span class="token operator">~</span> P x<span class="token punctuation">)</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+unfold not<span class="token punctuation">.</span>
+intros X P H <span class="token punctuation">[</span>x Px<span class="token punctuation">]</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-apply">apply</span> Px<span class="token punctuation">.</span>
+<span class="token keyword keyword-apply">apply</span> H<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><h2 class="mume-header" id="%E5%AF%B9%E5%8F%82%E6%95%B0%E4%BD%BF%E7%94%A8%E5%AE%9A%E7%90%86">&#x5BF9;&#x53C2;&#x6570;&#x4F7F;&#x7528;&#x5B9A;&#x7406;</h2>
+
+<p>Coq&#x7684;&#x7279;&#x6027;&#x662F;&#x5C06;&#x8BC1;&#x660E;&#x672C;&#x8EAB;&#x770B;&#x4F5C;&#x4E00;&#x7B49;&#x5BF9;&#x8C61;&#x2014;&#x2014;&#x51FD;&#x6570;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x50CF;&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x4E00;&#x6837;&#x4F7F;&#x7528;&#x5B9A;&#x7406;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x505A;&#x5982;&#x4E0B;&#x68C0;&#x67E5;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token keyword keyword-Check">Check</span> plus_comm<span class="token punctuation">.</span>
+<span class="token comment">(*plus_comm
+     : forall n m : nat,
+       n + m = m + n*)</span>
+<span class="token keyword keyword-Check">Check</span> plus_comm <span class="token number">1</span><span class="token punctuation">.</span>
+<span class="token comment">(*plus_comm 1
+     : forall m : nat,
+       1 + m = m + 1*)</span>
+<span class="token keyword keyword-Check">Check</span> plus_comm <span class="token number">1</span> <span class="token number">2</span><span class="token punctuation">.</span>
+<span class="token comment">(*plus_comm 1 2
+     : 1 + 2 = 2 + 1*)</span>
+<span class="token keyword keyword-Check">Check</span> plus_comm <span class="token keyword keyword-_">_</span> <span class="token number">1</span><span class="token punctuation">.</span>
+<span class="token comment">(*plus_comm ?n 2
+     : ?n + 2 = 2 + ?n
+where
+?n : [ |- nat]*)</span>
+<span class="token keyword keyword-Check">Check</span> plus_comm <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> a b <span class="token punctuation">:</span>nat<span class="token punctuation">,</span> a <span class="token operator">+</span> b <span class="token operator">=</span> b <span class="token operator">+</span> a<span class="token punctuation">.</span>
+<span class="token comment">(*plus_comm
+:
+forall a b : nat, a + b = b + a
+     : forall a b : nat,
+       a + b = b + a*)</span>
+<span class="token keyword keyword-Example">Example</span> plus_copy <span class="token punctuation">:</span> <span class="token keyword keyword-forall">forall</span> p q <span class="token punctuation">:</span> nat<span class="token punctuation">,</span>
+p <span class="token operator">+</span> q <span class="token operator">=</span> q <span class="token operator">+</span> p <span class="token operator">-&gt;</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">=</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Admitted">Admitted</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Check">Check</span> plus_copy <span class="token keyword keyword-_">_</span> <span class="token keyword keyword-_">_</span> plus_copy<span class="token punctuation">.</span>
+</pre><p>&#x7531;&#x4E8E;&#x5B9A;&#x7406;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x51FD;&#x6570;&#xFF0C;&#x88AB;&#x5E94;&#x7528;&#x5200;&#x5BF9;&#x5E94;&#x7C7B;&#x578B;&#x7684;&#x524D;&#x63D0;&#x4E0A;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x5728;&#x8BC1;&#x660E;&#x4E2D;&#x76F4;&#x63A5;&#x4EA7;&#x751F;&#x7ED3;&#x8BBA;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4F7F;&#x7528;&#x65AD;&#x8A00;&#xFF0C;</p>
+<p>&#x4E0B;&#x9762;&#x5BF9;&#x4E00;&#x4E2A;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#x7684;&#x793A;&#x4F8B;&#x8FDB;&#x884C;&#x5206;&#x6790;&#xFF0C;&#x4EE5;&#x4FBF;&#x8BFB;&#x8005;&#x80FD;&#x591F;&#x5B8C;&#x5168;&#x7406;&#x89E3;&#x8FD9;&#x79CD;&#x7528;&#x6CD5;&#x3002;</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq"><span class="token comment">(*&#x51E0;&#x4E2A;&#x524D;&#x63D0;*)</span>
+<span class="token keyword keyword-Fixpoint">Fixpoint</span> In <span class="token punctuation">{</span>A <span class="token punctuation">:</span> <span class="token keyword keyword-Type">Type</span><span class="token punctuation">}</span> <span class="token punctuation">(</span>x <span class="token punctuation">:</span> A<span class="token punctuation">)</span> <span class="token punctuation">(</span>l <span class="token punctuation">:</span> list A<span class="token punctuation">)</span> <span class="token punctuation">:</span><span class="token keyword keyword-Prop">Prop</span> <span class="token operator">:=</span>
+<span class="token keyword keyword-match">match</span> l <span class="token keyword keyword-with">with</span>
+<span class="token operator">|</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=&gt;</span> False
+<span class="token operator">|</span> x<span class="token operator">&apos;</span> <span class="token punctuation">:</span><span class="token punctuation">:</span> l<span class="token operator">&apos;</span> <span class="token operator">=&gt;</span> x<span class="token operator">&apos;</span><span class="token operator">=</span> x <span class="token operator">\/</span> In x l<span class="token operator">&apos;</span>
+<span class="token keyword keyword-end">end</span><span class="token punctuation">.</span>
+
+
+<span class="token keyword keyword-Theorem">Theorem</span> in_not_nil<span class="token punctuation">:</span>
+<span class="token keyword keyword-forall">forall</span> A <span class="token punctuation">(</span>x<span class="token punctuation">:</span> A<span class="token punctuation">)</span> <span class="token punctuation">(</span>l<span class="token punctuation">:</span> list A<span class="token punctuation">)</span> <span class="token punctuation">,</span> In x l <span class="token operator">-&gt;</span> l <span class="token operator">&lt;&gt;</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros A x l H<span class="token punctuation">.</span> unfold not<span class="token punctuation">.</span>
+intros H1<span class="token punctuation">.</span> destruct l eqn <span class="token punctuation">:</span> HE<span class="token punctuation">.</span>
+<span class="token operator">-</span>simpl <span class="token keyword keyword-in">in</span> H<span class="token punctuation">.</span> destruct H<span class="token punctuation">.</span>
+<span class="token operator">-</span>discriminate H1<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+
+<span class="token keyword keyword-Lemma">Lemma</span> In_map_iff <span class="token punctuation">:</span>
+<span class="token keyword keyword-forall">forall</span> <span class="token punctuation">(</span>A B <span class="token punctuation">:</span> <span class="token keyword keyword-Type">Type</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>f <span class="token punctuation">:</span> A <span class="token operator">-&gt;</span> B<span class="token punctuation">)</span> <span class="token punctuation">(</span>l<span class="token punctuation">:</span> list A<span class="token punctuation">)</span> <span class="token punctuation">(</span>y <span class="token punctuation">:</span> B<span class="token punctuation">)</span><span class="token punctuation">,</span>
+In y <span class="token punctuation">(</span>map f l<span class="token punctuation">)</span> <span class="token operator">&lt;-&gt;</span> <span class="token keyword keyword-exists">exists</span> x <span class="token punctuation">,</span>f x <span class="token operator">=</span> y <span class="token operator">/\</span> In x l<span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros A B f l y<span class="token punctuation">.</span> split<span class="token punctuation">.</span>
+<span class="token keyword keyword-Admitted">Admitted</span><span class="token punctuation">.</span>
+
+<span class="token comment">(*&#x4E00;&#x4E2A;&#x590D;&#x6742;&#x793A;&#x4F8B;*)</span>
+Exmaple lemma_application_ex <span class="token punctuation">:</span> 
+<span class="token keyword keyword-forall">forall</span> <span class="token punctuation">{</span>n <span class="token punctuation">:</span> nat<span class="token punctuation">}</span> <span class="token punctuation">{</span>ns <span class="token punctuation">:</span>list nat<span class="token punctuation">}</span>&#xFF0C;
+In n <span class="token punctuation">(</span>map <span class="token punctuation">(</span><span class="token keyword keyword-fun">fun</span> m <span class="token operator">=&gt;</span> m <span class="token operator">*</span> <span class="token number">0</span><span class="token punctuation">)</span> ns<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> n <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-Proof">Proof</span><span class="token punctuation">.</span>
+intros n ns H<span class="token punctuation">.</span>
+destruct <span class="token punctuation">(</span>proj1 <span class="token keyword keyword-_">_</span> <span class="token keyword keyword-_">_</span> <span class="token punctuation">(</span>In_map_iff <span class="token keyword keyword-_">_</span> <span class="token keyword keyword-_">_</span> <span class="token keyword keyword-_">_</span> <span class="token keyword keyword-_">_</span> <span class="token keyword keyword-_">_</span><span class="token punctuation">)</span> H<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> <span class="token punctuation">[</span>m <span class="token punctuation">[</span>Hm <span class="token keyword keyword-_">_</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span>
+rewrite mult_0_r <span class="token keyword keyword-in">in</span> Hm<span class="token punctuation">.</span> rewrite <span class="token operator">&lt;-</span> Hm<span class="token punctuation">.</span> reflexivity<span class="token punctuation">.</span>
+<span class="token keyword keyword-Qed">Qed</span><span class="token punctuation">.</span>
+</pre><p>&#x6CE8;&#x610F;&#x8FD9;&#x4E2A;&#x4F4D;&#x7F6E;<code>destruct (proj1 _ _ (In_map_iff _ _ _ _ _) H) as [m [Hm1 Hm2]].</code>.&#x6211;&#x4EEC;&#x6765;&#x5206;&#x6790;destruct &#x5230;&#x5E95;&#x62C6;&#x4E86;&#x4EC0;&#x4E48;&#x4E1C;&#x897F;&#x3002;</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x5B9A;&#x7406;&#x9664;&#x4E86;&#x63A5;&#x6536;&#x7279;&#x5B9A;&#x53C2;&#x6570;&#x5916;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x5728;&#x53C2;&#x6570;&#x540E;&#x9762;&#x6DFB;&#x52A0;&#x5047;&#x8BBE;&#x4E00;&#x904D;&#x5E94;&#x7528;&#x5B9A;&#x7406;(&#x6B63;&#x63A8;).&#x9996;&#x5148;proj1 &#x63A5;&#x6536;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#x7528;<code>_</code>&#x4EE3;&#x66FF;,Coq&#x53EF;&#x4EE5;&#x81EA;&#x52A8;&#x63A8;&#x7406;&#x5F97;&#x51FA;&#x53C2;&#x6570;&#xFF0C;&#x5728;&#x53C2;&#x6570;&#x540E;&#x9762;&#x53C8;&#x63A5;&#x6536;&#x4E86;&#x4E00;&#x4E2A;&#x5B9A;&#x7406;<code>(In_map_iff _ _ _ _ _)</code>, <code>In_map_iff</code>&#x662F;&#x53CC;&#x5411;&#x7684;&#xFF0C;&#x6839;&#x636E;&#x5B9A;&#x4E49;&#x53EF;&#x4EE5;&#x5206;&#x89E3;&#x4E3A;&#x4E24;&#x4E2A;&#x5B9A;&#x7406;&#x5408;&#x53D6;&#xFF0C;&#x8FD9;&#x521A;&#x597D;&#x5339;&#x914D;&#x5230;&#x4E86;proj1&#x7684;&#x524D;&#x63D0;. &#x5F53;proj1 &#x5E94;&#x7528;&#x5230; In_map_iff &#x540E;&#xFF0C;proj1 &#x672C;&#x8EAB;&#x7684;&#x53C2;&#x6570;&#x88AB;In_map_iff &#x4E2D;&#x5177;&#x4F53;&#x5185;&#x5BB9;&#x66FF;&#x4EE3;&#xFF0C;&#x6B64;&#x65F6;&#x672A;&#x77E5;&#x53C2;&#x6570;&#x53D8;&#x4E3A;&#x4E86;In_map_iff &#x4E2D;&#x7684;&#x4E94;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x518D;&#x6B21;&#x5C06;&#x6574;&#x4E2A;&#x5F0F;&#x5B50;&#x5E94;&#x7528;&#x5728;H&#x4E0A;&#xFF0C;H&#x4E5F;&#x6070;&#x597D;&#x5339;&#x914D;&#x4E86;&#x524D;&#x63D0;&#xFF0C;&#x4ECE;&#x800C;&#x5F97;&#x5230;&#x4E86;&#x4E00;&#x4E2A;&#x8F83;&#x4E3A;&#x590D;&#x6742;&#x7684;&#x5F0F;&#x5B50;&#x3002;&#x5728;&#x5B9A;&#x7406;&#x8BC1;&#x660E;&#x65F6;&#x53EF;&#x4EE5;&#x5229;&#x7528;<code>Check</code>&#x53EF;&#x4EE5;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#x3002;</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq">proj1
+  <span class="token punctuation">(</span>In n
+     <span class="token punctuation">(</span>map <span class="token punctuation">(</span><span class="token keyword keyword-fun">fun</span> m <span class="token punctuation">:</span> nat <span class="token operator">=&gt;</span> m <span class="token operator">*</span> <span class="token number">0</span><span class="token punctuation">)</span> ns<span class="token punctuation">)</span> <span class="token operator">-&gt;</span>
+   <span class="token keyword keyword-exists">exists</span> x <span class="token punctuation">:</span> nat<span class="token punctuation">,</span>
+     <span class="token punctuation">(</span><span class="token keyword keyword-fun">fun</span> m <span class="token punctuation">:</span> nat <span class="token operator">=&gt;</span> m <span class="token operator">*</span> <span class="token number">0</span><span class="token punctuation">)</span> x <span class="token operator">=</span> n <span class="token operator">/\</span>
+     In x ns<span class="token punctuation">)</span>
+  <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword keyword-exists">exists</span> x <span class="token punctuation">:</span> nat<span class="token punctuation">,</span>
+      <span class="token punctuation">(</span><span class="token keyword keyword-fun">fun</span> m <span class="token punctuation">:</span> nat <span class="token operator">=&gt;</span> m <span class="token operator">*</span> <span class="token number">0</span><span class="token punctuation">)</span> x <span class="token operator">=</span> n <span class="token operator">/\</span>
+      In x ns<span class="token punctuation">)</span> <span class="token operator">-&gt;</span>
+   In n
+     <span class="token punctuation">(</span>map <span class="token punctuation">(</span><span class="token keyword keyword-fun">fun</span> m <span class="token punctuation">:</span> nat <span class="token operator">=&gt;</span> m <span class="token operator">*</span> <span class="token number">0</span><span class="token punctuation">)</span> ns<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>In_map_iff nat nat
+     <span class="token punctuation">(</span><span class="token keyword keyword-fun">fun</span> m <span class="token punctuation">:</span> nat <span class="token operator">=&gt;</span> m <span class="token operator">*</span> <span class="token number">0</span><span class="token punctuation">)</span> ns n<span class="token punctuation">)</span> H
+     <span class="token punctuation">:</span> <span class="token keyword keyword-exists">exists</span> x <span class="token punctuation">:</span> nat<span class="token punctuation">,</span>
+         x <span class="token operator">*</span> <span class="token number">0</span> <span class="token operator">=</span> n <span class="token operator">/\</span> In x ns
+</pre><p>destruct &#x5C06;&#x51FD;&#x6570;&#x63A8;&#x5230;&#x7ED3;&#x679C;<code>x * 0 = n /\ In x ns</code>&#x8FDB;&#x884C;&#x62C6;&#x5206;&#xFF0C;&#x5C06;&#x547D;&#x540D;&#x4E3A;m,&#x5E76;&#x5C06;&#x5408;&#x53D6;&#x62C6;&#x5206;&#x6210;&#x4E24;&#x4E2A;&#x524D;&#x63D0;&#x3002;</p>
+<pre data-role="codeBlock" data-info="coq" class="language-coq">m <span class="token punctuation">:</span> nat
+Hm1 <span class="token punctuation">:</span> m <span class="token operator">*</span> <span class="token number">0</span> <span class="token operator">=</span> n
+Hm2 <span class="token punctuation">:</span> In m ns
+</pre><p>&#x6CE8;&#x610F;&#x5230;&#x6574;&#x4E2A;&#x8BC1;&#x660E;&#x5E76;&#x672A;&#x7528;&#x5230;Hm2&#x8FD9;&#x4E2A;&#x524D;&#x63D0;,<code>destruct ... as</code>&#x540E;&#x9762;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x54D1;&#x53D8;&#x91CF;<code>_</code>&#x6765;&#x66FF;&#x4EE3;Hm2&#xFF0C;&#x6B64;&#x65F6;Hm2&#x5C06;&#x4E0D;&#x88AB;&#x5F15;&#x5165;&#x5230;&#x524D;&#x63D0;.</p>
+</div></body></html>
+    </div>
+  </body>
+</html>
